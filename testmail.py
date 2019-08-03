@@ -4,43 +4,25 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
 
-def attach_images(message):
-  with open('./wet-plant.png', 'rb') as f:
-    # set attachment mime and file name, the image type is png
+def attach_images(path, id, message):
+  xid = str(id)
+  cid = '<' + str(id) + '>'
+  with open(path, 'rb') as f:
     mime = MIMEBase('image', 'png', filename='img1.png')
-    # add required header data:
     mime.add_header('Content-Disposition', 'attachment', filename='img1.png')
-    mime.add_header('X-Attachment-Id', '0')
-    mime.add_header('Content-ID', '<0>')
-    # read attachment file content into the MIMEBase object
+    mime.add_header('X-Attachment-Id', xid)
+    mime.add_header('Content-ID', cid)
     mime.set_payload(f.read())
-    # encode with base64
     encoders.encode_base64(mime)
-    # add MIMEBase object to MIMEMultipart object
     message.attach(mime)
-
-  with open('./dry-plant.png', 'rb') as f:
-      # set attachment mime and file name, the image type is png
-      mime = MIMEBase('image', 'png', filename='img2.png')
-      # add required header data:
-      mime.add_header('Content-Disposition', 'attachment', filename='img2.png')
-      mime.add_header('X-Attachment-Id', '1')
-      mime.add_header('Content-ID', '<1>')
-      # read attachment file content into the MIMEBase object
-      mime.set_payload(f.read())
-      # encode with base64
-      encoders.encode_base64(mime)
-      # add MIMEBase object to MIMEMultipart object
-      message.attach(mime)
   return message
 
 def send_email(message):
-
   sender_email = "toshidev123@gmail.com"
   receiver_email = "leonardotkimura@gmail.com"
   password = "ampdtbaf"
 
-  message["Subject"] = "multipart test"
+  message["Subject"] = "Relatório Plantinhas IoT"
   message["From"] = sender_email
   message["To"] = receiver_email
 
@@ -51,14 +33,12 @@ def send_email(message):
           sender_email, receiver_email, message.as_string()
       )
 
-html = html_builder.build([1,1,0])
-
 
 message = MIMEMultipart("alternative")
+message = attach_images('./images/wet-plant.png', 0 ,message)
+message = attach_images('./images/dry-plant.png', 1 ,message)
 
-
-message = attach_images(message)
-
+html = html_builder.build([1,0,0])
 html_part = MIMEText(html, "html")
 message.attach(html_part)
 
