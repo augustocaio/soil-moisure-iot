@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+
 import smtplib, ssl, html_builder
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -19,7 +22,7 @@ def attach_images(path, id, message):
 
 def send_email(message):
   sender_email = "toshidev123@gmail.com"
-  receiver_email = "leonardotkimura@gmail.com"
+  receiver_email = "caio.augusto.pires@usp.br"
   password = "ampdtbaf"
 
   message["Subject"] = "Relatório Plantinhas IoT"
@@ -34,15 +37,15 @@ def send_email(message):
       )
 
 
-message = MIMEMultipart("alternative")
-message = attach_images('./images/wet-plant.png', 0 ,message)
-message = attach_images('./images/dry-plant.png', 1 ,message)
+# message = MIMEMultipart("alternative")
+# message = attach_images('./images/wet-plant.png', 0 ,message)
+# message = attach_images('./images/dry-plant.png', 1 ,message)
 
-html = html_builder.build([1,0,0])
-html_part = MIMEText(html, "html")
-message.attach(html_part)
+# html = html_builder.build([1,0,0])
+# html_part = MIMEText(html, "html")
+# message.attach(html_part)
 
-send_email(message)
-print(" \n Sent!")
+# send_email(message)
+# print(" \n Sent!")
 
 
