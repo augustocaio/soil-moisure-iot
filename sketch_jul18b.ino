@@ -10,33 +10,37 @@ void setup() {
 
 // the loop routine runs over and over again forever:
 void loop() {
-  // Set LED colour to their Digital Ouputs.  Read the input on analog pin 0:
-  int yellow = 2;
-  int blue = 3;
-  int red = 4;
-  int sensorValue = analogRead(A1);
-
-  // Set the initial state of the LEDs to OFF
-  digitalWrite(2, LOW);
-  digitalWrite(3, LOW);
-  digitalWrite(4, LOW);
+  int sensorValue1 = analogRead(A1);
+  int sensorValue2 = analogRead(A2);
+  int sensorValue3 = analogRead(A3);
   
-  // Logic Loop that sets the required LED to ON
-  if (sensorValue >= 1000) (digitalWrite(yellow, HIGH));
-  else if ((sensorValue <= 999) && (sensorValue >=901)) (digitalWrite(blue, HIGH));
-  else if (sensorValue <= 900) (digitalWrite(red, HIGH));
-  else ;
-
   // Prints the condition of soil.  Dry, Wet or Perfect
-  if (sensorValue >= 1000) (Serial.print("SOIL IS TOO DRY!!!!!    "));
-  else if ((sensorValue <= 999) && (sensorValue >=901)) (Serial.print("SOIL IS PERFECT!!!!!    "));
-  else if (sensorValue <= 900) (Serial.print("SOIL IS TOO WET!!!!!    "));
+  if (sensorValue1 >= 1000) (Serial.print("1,too dry,"));
+  else if ((sensorValue1 <= 999) && (sensorValue1 >=901)) (Serial.print("1,perfect,"));
+  else if (sensorValue1 <= 900) (Serial.print("1,too wet,"));
   else;
+  Serial.println(sensorValue1);
+
+
+   // Prints the condition of soil.  Dry, Wet or Perfect
+  if (sensorValue2 >= 1000) (Serial.print("2,too dry,"));
+  else if ((sensorValue2 <= 999) && (sensorValue2 >=901)) (Serial.print("2,perfect,"));
+  else if (sensorValue2 <= 900) (Serial.print("2,too wet,"));
+  else;
+  Serial.println(sensorValue2);
   
-  // print out the value you read:
-  Serial.print("Marijuana Soil Humidity is: ");
-  Serial.println(sensorValue);
-  delay(500);        // delay in between reads for stability
+  // Prints the condition of soil.  Dry, Wet or Perfect
+  if (sensorValue3 >= 1000) (Serial.print("3,too dry,"));
+  else if ((sensorValue3 <= 999) && (sensorValue3 >=901)) (Serial.print("3,perfect,"));
+  else if (sensorValue3 <= 900) (Serial.print("3,too wet,"));
+  else;
+  Serial.println(sensorValue3);
+  
+  Serial.println(5000);
+  delay(5000);
+  //15min
+  //Serial.println(900000);
+  //delay(900000);        // delay in between reads for stability
 
 
 

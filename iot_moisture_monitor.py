@@ -50,7 +50,7 @@ def read_send_status():
         status = []
 
         for plant in plants_status :
-            if plant[1] > 1000:
+            if plant[1] > 700:
                 status.append(0)
             else:
                 status.append(1)
